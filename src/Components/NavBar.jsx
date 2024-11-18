@@ -8,9 +8,9 @@ const NavBar = () => {
         <Navbar bg="dark" data-bs-theme="dark">
             <Container className="me-auto my-2 my-lg-0 gap-3">
                 <Nav>
-                    <Nav.Link> <Link to={'/'}>Home</Link></Nav.Link>
-                    <Nav.Link href="#features">Features</Nav.Link>
-                    <Nav.Link href="#pricing">Pricing</Nav.Link>
+                    <Link to={'/'}>Home</Link>
+                    <Link>Features</Link>
+                    <Link>Pricing</Link>
                 </Nav>
             </Container>
         </Navbar>

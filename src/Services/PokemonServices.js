@@ -6,6 +6,9 @@ function getAllPokemon (offset = 0, limit = 22){
 function getPokemonByID(id){
     return axios.get("https://pokeapi.co/api/v2/pokemon/"+id)
 }
+function getSpeciesByID(id){
+    return axios.get("https://pokeapi.co/api/v2/pokemon-species/"+id)
+}
 export default{
-    getAllPokemon, getPokemonByID
+    getAllPokemon, getPokemonByID, getSpeciesByID
 }
