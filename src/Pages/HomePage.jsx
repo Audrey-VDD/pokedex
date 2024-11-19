@@ -21,8 +21,15 @@ const HomePage = () => {
     const fetchPokemons = async () => {
         try {
             const response = await PokemonServices.getAllPokemon((currentPage - 1) * limit, limit)
+            const res = Object.entries(response.data.results)
+            res.sort((a, b) => {
+                return a[1].name.localeCompare(b[1].name);
+            })
             // console.log(response.data.results);
-            setPokemon(response.data.results);
+            setPokemon(res);
+            setFilteredPokemon(res);
+
+
             setMaxPage(500);
             setTimeout(() => {
                 window.scrollTo({
@@ -31,6 +38,7 @@ const HomePage = () => {
                     behavior: "instant",
                 });
             }, 50)
+
         } catch (error) {
             console.log(error);
         }
@@ -59,8 +67,8 @@ const HomePage = () => {
 
 
         <div className='d-flex justify-content-center flex-wrap gap-4'>
-            {pokemon.map((pokemon) => {
-                return <PokemonCard pokemonCard={pokemon} key={pokemon.id}></PokemonCard>
+            {filteredPokemon.map((pokemon) => {
+                return <PokemonCard pokemonCard={pokemon[1]} key={pokemon[1].id}></PokemonCard>
             })}
         </div>
 

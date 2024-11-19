@@ -3,6 +3,7 @@ import NavBar from "./Components/NavBar";
 import HomePage from "./Pages/HomePage";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import PokemonDetailsPage from "./Pages/PokemonDetailsPage";
+import TypesPage from "./Pages/TypesPage";
 
 const App = () => {
   return <>
@@ -11,6 +12,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<HomePage></HomePage>} ></Route>
         <Route path='/pokemon/:id' element={<PokemonDetailsPage></PokemonDetailsPage>}></Route>
+        <Route path='/types/' element={<TypesPage></TypesPage>}></Route>
       </Routes>
 
 
