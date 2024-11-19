@@ -140,6 +140,7 @@ a{
 
 .blue {
   background-color: var(--pokemon-color-Blue);
+  border-radius: 3%;
 }
 
 .yellow {
@@ -200,6 +201,7 @@ a{
 
 .black {
   background-color: var(--pokemon-color-Black);
+  color: white;
 }
 
 .white {
@@ -210,6 +212,7 @@ a{
 
 .black-2 {
   background-color: var(--pokemon-color-Black2);
+  color: white;
 }
 
 .white-2 {

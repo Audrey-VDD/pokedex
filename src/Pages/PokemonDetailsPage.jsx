@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import PokemonServices from "../Services/PokemonServices";
 import { useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
+import CanvasJSReact from '@canvasjs/react-charts';
 
 const PokemonDetailsPage = () => {
     const [detailsPokemon, setDetailsPokemon] = useState({});
@@ -28,7 +29,10 @@ const PokemonDetailsPage = () => {
             const res = await PokemonServices.getDamage(response.data.types[0].type.name);
             setDamage(res.data);
             setDetailsPokemon(response.data);
-            console.log(response.data.game_indices[0].version.name);
+            // console.log(response.data.game_indices[0].version.name);
+            setGameVersions(response.data);
+            // console.log(response.data);
+
             // console.log(res.data);
         } catch (error) {
             console.log(error);
@@ -73,7 +77,7 @@ const PokemonDetailsPage = () => {
                 <div>
                     <h2>Types</h2>
                     {detailsPokemon.types && detailsPokemon.types.map((type) => {
-                        return <li key={type}>{type.type.name}</li>
+                        return <button className={type.type.name} key={type}>{type.type.name}</button>
                     })}
                 </div>
                 <div className="mt-5">
@@ -92,12 +96,12 @@ const PokemonDetailsPage = () => {
                 </div>
             </div>
         </div>
-
-        <div className="mt-5">
-            <h3>Game versions</h3>
-
+        <h3>Game versions</h3>
+        <div className="d-flex flex-wrap justify-content-center mt-3 mb-5 gap-2">
+            {gameVersions.game_indices && gameVersions.game_indices.map((version) => {
+                return <button className={version.version.name}>{version.version.name}</button>
+            })}
         </div>
-
 
     </Container>
 }
