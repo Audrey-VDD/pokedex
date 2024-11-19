@@ -9,6 +9,9 @@ function getPokemonByID(id){
 function getSpeciesByID(id){
     return axios.get("https://pokeapi.co/api/v2/pokemon-species/"+id)
 }
+function getDamage(id){
+    return axios.get("https://pokeapi.co/api/v2/type/"+id)
+}
 export default{
-    getAllPokemon, getPokemonByID, getSpeciesByID
+    getAllPokemon, getPokemonByID, getSpeciesByID, getDamage
 }

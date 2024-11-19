@@ -13,7 +13,7 @@ const HomePage = () => {
     const fetchPokemons = async () => {
         try {
             const response = await PokemonServices.getAllPokemon((currentPage-1)*limit, limit)
-            console.log(response.data.results);
+            // console.log(response.data.results);
             setPokemon(response.data.results);
             setMaxPage(500);
             setTimeout(() => {
