@@ -260,13 +260,9 @@ a{
 .shield {
   background-color: var(--pokemon-color-Shield);
 }
-.btnType{
-  border-radius: 30px;
-  background-color: #1636c5;
-  border: thick double #9ebcc7;
-  color: white;
+.typeTitle{
+  color: rgb(189, 4, 4);
+  display: flex;
+  justify-content: center;
+  flex: wrap;
 }
-/* .dropdown{
-  max-height: 50vh;
-  scroll-behavior: auto;
-} */

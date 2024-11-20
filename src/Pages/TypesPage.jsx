@@ -27,24 +27,17 @@ const TypePage = () => {
 
 
     return <>
-        <div style={{ color: "red" }}>
-            <h1>TYPES</h1>
+        <div className={"typeTitle"}>
+            <h1>{id}</h1>
+        </div>
+
+        <div className='d-flex justify-content-center flex-wrap gap-4 mt-4'>
             {nametype.map((poke) => {
                 return <PokemonCard pokemonCard={poke.pokemon}></PokemonCard>
             })}
         </div>
 
-        {/* <div className='d-flex justify-content-center flex-wrap gap-4'>
-            {nametype.map((poke) => {
-                return <PokemonCard pokemonCard={poke.pokemon.name} key={poke.pokemon.name}></PokemonCard>
-            })}
-        </div> */}
 
-        {/* <div className='d-flex justify-content-center flex-wrap gap-4'>
-            {filteredPokemon.map((pokemon) => {
-                return <PokemonCard pokemonCard={pokemon[1]} key={pokemon[1].id}></PokemonCard>
-            })}
-        </div> */}
     </>;
 }
 
