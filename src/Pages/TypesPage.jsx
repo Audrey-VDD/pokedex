@@ -1,36 +1,22 @@
-import { useEffect, useState } from "react";
-import TypesServices from "../Services/TypesServices";
+import { useState } from "react";
+import PokemonServices from "../Services/PokemonServices";
+import { useParams } from "react-router-dom";
 
 
-const TypesPage = () => {
-    const [types, setTypes] = useState([]);
 
-    const fetchType = async () => {
-        try {
-            const response = await TypesServices.getAllTypes()
-            console.log(response.data.results[0].name);
-            setTypes(response.data)
+const TypePage = () => {
+    const [pokeByType, setPokeByType] = useState([]);
+    const {id} = useParams();
 
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    useEffect(() => {
-        fetchType()
-    }, [])
+   
 
 
 
     return <>
-        <div>
+        <div style={{color: "red"}}>
             <h1>TYPES</h1>
         </div>
-
-        {types.results && types.results.map((type) => {
-            return <button>{type.name}</button>
-        })}
-
     </>;
 }
 
-export default TypesPage;
+export default TypePage;

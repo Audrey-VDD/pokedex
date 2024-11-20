@@ -260,3 +260,13 @@ a{
 .shield {
   background-color: var(--pokemon-color-Shield);
 }
+.btnType{
+  border-radius: 30px;
+  background-color: #1636c5;
+  border: thick double #9ebcc7;
+  color: white;
+}
+/* .dropdown{
+  max-height: 50vh;
+  scroll-behavior: auto;
+} */

@@ -1,0 +1,1 @@
+//  Page pour la recherche, il faut tous les pokemon avec limit 5000 par exemple et la barre de recherche
