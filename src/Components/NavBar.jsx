@@ -36,7 +36,7 @@ const NavBar = () => {
 
                         <Dropdown.Menu className={"dropdown"}>
                             {types.results && types.results.map((type) => {
-                                return <Dropdown.Item  className={"btnType"} href={'/types/'+type.name}>{type.name}</Dropdown.Item> 
+                                return <Dropdown.Item  className={"btnType"} href={'/type/'+type.name}>{type.name}</Dropdown.Item> 
                             })}
                         </Dropdown.Menu>
                     </Dropdown>

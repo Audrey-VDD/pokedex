@@ -12,7 +12,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<HomePage></HomePage>} ></Route>
         <Route path='/pokemon/:id' element={<PokemonDetailsPage></PokemonDetailsPage>}></Route>
-        <Route path='/types/:id' element={<TypesPage></TypesPage>}></Route>
+        <Route path='/type/:id' element={<TypesPage></TypesPage>}></Route>
       </Routes>
 
 
