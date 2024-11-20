@@ -1,34 +1,36 @@
 import { useEffect, useState } from "react";
 import TypesServices from "../Services/TypesServices";
-import ItemCard from "../Components/ItemCard";
 
 
 const TypesPage = () => {
     const [types, setTypes] = useState([]);
 
-    const fetchType = async () =>{
-        try{
+    const fetchType = async () => {
+        try {
             const response = await TypesServices.getAllTypes()
-            console.log(response.data.results);
+            console.log(response.data.results[0].name);
             setTypes(response.data)
-            
-        }catch (error) {
+
+        } catch (error) {
             console.log(error);
         }
     }
-    useEffect(()=>{
+    useEffect(() => {
         fetchType()
     }, [])
 
 
 
     return <>
-    <h1>TYPES</h1>
-    {types.results && types.results.map((type)=>{
-        return <ItemCard itemCard={type[0]}></ItemCard>
-    })}
+        <div>
+            <h1>TYPES</h1>
+        </div>
+
+        {types.results && types.results.map((type) => {
+            return <button>{type.name}</button>
+        })}
 
     </>;
 }
- 
+
 export default TypesPage;
