@@ -266,3 +266,8 @@ a{
   justify-content: center;
   flex: wrap;
 }
+/* Pour scroller dans le menu des types */
+.dropdown-menu{
+  height: 65vh;
+  overflow-y: auto;
+}

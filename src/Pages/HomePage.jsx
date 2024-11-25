@@ -9,18 +9,21 @@ const HomePage = () => {
     const [pokemon, setPokemon] = useState([]);
     const [searchPokemon, setSearchPokemon] = useState(null);
     const [filteredPokemon, setFilteredPokemon] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
+
     const [maxPage, setMaxPage] = useState(1000);
-    const [limit, setLimit] = useState(22);
+    const limit = 21;
+    const [currentPage, setCurrentPage] = useState(1);
+
 
     const handleChange = (event) => {
         setSearchPokemon(event.currentTarget.value);
     }
     
-
+// J'appelle le service axios pokemon pour chercher les infos nécessaires
     const fetchPokemons = async () => {
         try {
-            const response = await PokemonServices.getAllPokemon((currentPage - 1) * limit, limit)
+            const offset = (currentPage - 1) * limit;
+            const response = await PokemonServices.getAllPokemon(limit, offset)
             const res = Object.entries(response.data.results)
             res.sort((a, b) => {
                 return a[1].name.localeCompare(b[1].name);
@@ -43,11 +46,14 @@ const HomePage = () => {
             console.log(error);
         }
     }
+    // Appelle  mon fetch sur la page au moment du chargement
     useEffect(() => {
-        fetchPokemons()
+        fetchPokemons(),
+        setSearchPokemon("")
     }, [currentPage]);
 
     useEffect(() =>{
+        // Possible aussi : const filteredPokemons = pokemon.filter((pokemon)=>{return pokemon.name.toLowerCase().includes(searchPokemon.toLowerCase())})
         setFilteredPokemon(pokemon.filter((tata) =>{
             // return tata[1].name.toLowerCase().startsWith(searchChampion.toLowerCase());
             return tata[1].name.toLowerCase().includes(searchPokemon.toLowerCase());
@@ -60,6 +66,7 @@ const HomePage = () => {
             <Form className="col-6" >
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Rechercher</Form.Label>
+                    {/* fonction onChange : capte chaque changement de l'input, value stocke ma valeur de recherche */}
                     <Form.Control type="text" placeholder="Charizard" value={searchPokemon} onChange={handleChange} />
                 </Form.Group>
             </Form>
@@ -67,6 +74,7 @@ const HomePage = () => {
 
 
         <div className='d-flex justify-content-center flex-wrap gap-4'>
+            {/* On peut mettre ((pokemon, index)=>{et dans key={index}}) ça donne la position de l'objet dans tableau*/}
             {filteredPokemon.map((pokemon) => {
                 return <PokemonCard pokemonCard={pokemon[1]} key={pokemon[1].id}></PokemonCard>
             })}
@@ -77,7 +85,8 @@ const HomePage = () => {
             {currentPage > 1 && <>
                 <Pagination.First onClick={() => { setCurrentPage(1) }} />
                 <Pagination.Prev onClick={() => { setCurrentPage(currentPage - 1) }} />
-                <Pagination.Item onClick={() => { setCurrentPage(1) }} >{1}</Pagination.Item>
+                {/* <Pagination.Item onClick={() => { setCurrentPage(1) }} >{1}</Pagination.Item> */}
+                
             </>}
 
             {currentPage - 5 > 0 && <>

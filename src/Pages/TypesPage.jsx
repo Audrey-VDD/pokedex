@@ -6,7 +6,7 @@ import PokemonCard from "../Components/PokemonCard";
 const TypePage = () => {
     const [nametype, setNameType] = useState([]);
     const { id } = useParams();
-    console.log(id);
+    // console.log(id);
 
 
     const fetchPokeByType = async () => {
@@ -15,15 +15,13 @@ const TypePage = () => {
             const res = await PokemonServices.getDamage(id)
             console.log(res.data.pokemon);
             setNameType(res.data.pokemon);
-
-
         } catch (error) {
             console.log(error);
         }
     }
     useEffect(() => {
         fetchPokeByType()
-    }, [])
+    }, [id])
 
 
     return <>

@@ -1,7 +1,8 @@
 import axios from "axios";
 
-function getAllPokemon (offset = 0, limit = 22){
-    return axios.get("https://pokeapi.co/api/v2/pokemon?offset=" + offset + "&limit=" + limit)
+function getAllPokemon (limit, offset){
+    return axios.get("https://pokeapi.co/api/v2/pokemon?limit=" + limit + "&offset=" + offset)
+    // Si on ne veut pas de pagination, on utilise le lien https://pokeapi.co/api/v2/pokemon?limit=50000 ça affichera tous les pokemons sur la page
 }
 function getPokemonByID(id){
     return axios.get("https://pokeapi.co/api/v2/pokemon/"+id)

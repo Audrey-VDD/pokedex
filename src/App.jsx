@@ -4,6 +4,7 @@ import HomePage from "./Pages/HomePage";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import PokemonDetailsPage from "./Pages/PokemonDetailsPage";
 import TypesPage from "./Pages/TypesPage";
+import GenerationPage from "./Pages/GenerationPage";
 
 const App = () => {
   return <>
@@ -13,9 +14,8 @@ const App = () => {
         <Route path='/' element={<HomePage></HomePage>} ></Route>
         <Route path='/pokemon/:id' element={<PokemonDetailsPage></PokemonDetailsPage>}></Route>
         <Route path='/type/:id' element={<TypesPage></TypesPage>}></Route>
+        <Route path='/generation/:id' element={<GenerationPage></GenerationPage>}></Route>
       </Routes>
-
-
     </BrowserRouter>
   </>;
 }
