@@ -21,23 +21,16 @@ const GenerationPage = () => {
         fetchPokemonByGeneration()
     }, [id]);
 
-
-
-
     return <>
 
         <div className={"typeTitle"}>
             <h1>{id}</h1>
         </div>
-
-
         {/* {generation.map((id)=>{
         return <p>{id.name}</p>
     })} */}
-
-
         <div className='d-flex justify-content-center flex-wrap gap-4 mt-4'>
-            {generation.map((name) => {
+            {generation && generation.map((name) => {
                 // console.log(name);
                 
                 return <PokemonCard pokemonCard={name}></PokemonCard>

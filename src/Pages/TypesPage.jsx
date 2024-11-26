@@ -30,7 +30,7 @@ const TypePage = () => {
         </div>
 
         <div className='d-flex justify-content-center flex-wrap gap-4 mt-4'>
-            {nametype.map((poke) => {
+            {nametype && nametype.map((poke) => {
                 return <PokemonCard pokemonCard={poke.pokemon}></PokemonCard>
             })}
         </div>

@@ -5,11 +5,11 @@ import PokemonCard from "../Components/PokemonCard";
 
 const HabitatPage = () => {
     const [habitatPokemon, setHabitatPokemon] = useState([]);
-    const { id } = useParams();
+    const { name } = useParams();
 
     const fetchHabitatByName = async () => {
         try {
-            const response = await HabitatServices.getHabitatByName(id);
+            const response = await HabitatServices.getHabitatByName(name);
             console.log(response.data.pokemon_species);
             setHabitatPokemon(response.data.pokemon_species)
 
@@ -20,7 +20,7 @@ const HabitatPage = () => {
     };
     useEffect(() => {
         fetchHabitatByName()
-    }, [id]);
+    }, [name]);
 
 
     return <>

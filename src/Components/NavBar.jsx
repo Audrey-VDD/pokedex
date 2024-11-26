@@ -17,6 +17,7 @@ const NavBar = () => {
     const [gameVersions, setGameVersions] = useState([]);
     const [habitats, setHabitats] = useState([]);
 
+    // Je peux utiliser toujours response du moment qu'elles ne sont pas dans le mêe fetch 
     // Récupérer les générations
     const fetchGeneration = async () =>{
         try {

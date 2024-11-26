@@ -18,7 +18,7 @@ const App = () => {
         <Route path='/type/:id' element={<TypesPage></TypesPage>}></Route>
         <Route path='/generation/:id' element={<GenerationPage></GenerationPage>}></Route>
         <Route path='/gameVersion/:id' element={<GameVersionPage></GameVersionPage>}></Route>
-        <Route path='/habitat/:id' element={<HabitatPage></HabitatPage>}></Route>
+        <Route path='/habitat/:name' element={<HabitatPage></HabitatPage>}></Route>
       </Routes>
     </BrowserRouter>
   </>;
