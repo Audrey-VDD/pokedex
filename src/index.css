@@ -261,13 +261,14 @@ a{
   background-color: var(--pokemon-color-Shield);
 }
 .typeTitle{
-  color: rgb(189, 4, 4);
+  color: rgb(127, 26, 26);
   display: flex;
   justify-content: center;
   flex: wrap;
+  font-weight: bolder;
 }
 /* Pour scroller dans le menu des types */
 .dropdown-menu{
-  height: 65vh;
+  height: 45vh;
   overflow-y: auto;
 }

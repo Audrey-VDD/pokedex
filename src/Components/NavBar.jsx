@@ -7,11 +7,15 @@ import TypesServices from '../Services/TypesServices';
 import { useEffect, useState } from "react";
 import GenerationServices from '../Services/GenerationServices';
 import { DropdownItem } from 'react-bootstrap';
+import GameVersionServices from '../Services/GameVersionServices';
+import HabitatServices from '../Services/HabitatServices';
 
 const NavBar = () => {
     const navigate = useNavigate();
     const [types, setTypes] = useState([]);
     const [generation, setGeneration] = useState([]);
+    const [gameVersions, setGameVersions] = useState([]);
+    const [habitats, setHabitats] = useState([]);
 
     // Récupérer les générations
     const fetchGeneration = async () =>{
@@ -36,9 +40,31 @@ const NavBar = () => {
     }
 
     // Récupérer les game versions
+    const fetchAllGameVersions = async () => {
+        try {
+            const resp = await GameVersionServices.getAllGameVersions()
+            // console.log(resp.data.results);  
+            setGameVersions(resp.data.results);
+        } catch (error) {
+            console.log(error); 
+        }
+    }
+
+    // Récupérer les habitats
+    const fetchAllHabitats = async () => {
+        try {
+            const respo = await HabitatServices.getAllHabitats()
+            console.log(respo.data.results);
+            setHabitats(respo.data.results)         
+        } catch(error) {
+            console.log(error);
+            
+        }
+    }
+
 
     useEffect(() => {
-        fetchType(), fetchGeneration()
+        fetchType(), fetchGeneration(), fetchAllGameVersions(), fetchAllHabitats()
     }, [])
 
 
@@ -72,6 +98,26 @@ const NavBar = () => {
                         <Dropdown.Menu className={"dropdown"}>
                             {generation.map((name)=>{
                                 return <Dropdown.Item key={name.name + "nav"} className={"btnType"} onClick={()=>{navigate('/generation/'+ name.name)}}>{name.name}</Dropdown.Item>
+                            })}
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="crystal" id="dropdown-basic">
+                            Game Versions
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu className={"dropdown"}>
+                            {gameVersions.map((version)=>{
+                                return <Dropdown.Item key={version.name + "nav"} className={"btnType"} onClick={()=>{navigate('/gameVersion/'+ version.name)}}>{version.name}</Dropdown.Item>
+                            })}
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="crystal" id="dropdown-basic">
+                            Habitats
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu className={"dropdown"}>
+                            {habitats.map((habitat)=>{
+                                return <Dropdown.Item key={habitat.name} onClick={()=> {navigate('/habitat/'+ habitat.name)}}>{habitat.name}</Dropdown.Item>
                             })}
                         </Dropdown.Menu>
                     </Dropdown>

@@ -6,12 +6,12 @@ import PokemonCard from "../Components/PokemonCard";
 const GenerationPage = () => {
     const [generation, setGeneration] = useState([]);
     const { id } = useParams();
-    console.log(id);
+    // console.log(id);
 
     const fetchPokemonByGeneration = async () => {
         try {
             const response = await GenerationServices.getGenerationByName(id);
-            console.log(response.data.pokemon_species);
+            // console.log(response.data.pokemon_species);
             setGeneration(response.data.pokemon_species)
         } catch (error) {
             console.log(error);
@@ -38,6 +38,8 @@ const GenerationPage = () => {
 
         <div className='d-flex justify-content-center flex-wrap gap-4 mt-4'>
             {generation.map((name) => {
+                // console.log(name);
+                
                 return <PokemonCard pokemonCard={name}></PokemonCard>
             })}
         </div>

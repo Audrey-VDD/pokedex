@@ -16,7 +16,7 @@ const PokemonCard = ({pokemonCard}) => {
             <Card.Body>
                 <Card.Title>
                     {/* Récupérer l'id dans l'url, on prend le début du lien qu'on remplace par rien */}
-                    {pokemonCard.url.replace("https://pokeapi.co/api/v2/pokemon/", "").replace("/", "")}
+                    {pokemonCard.url.replace("https://pokeapi.co/api/v2/pokemon/", "").replace("https://pokeapi.co/api/v2/pokemon-species/","").replace("/", "")}
                 </Card.Title>
                 <Card.Text> <img style={{ width: '10rem' }} src={"https://img.pokemondb.net/artwork/"+pokemonCard.name+".jpg"} alt="" /></Card.Text>
             </Card.Body>

@@ -10,8 +10,8 @@ const HomePage = () => {
     const [searchPokemon, setSearchPokemon] = useState(null);
     const [filteredPokemon, setFilteredPokemon] = useState([]);
 
-    const [maxPage, setMaxPage] = useState(1000);
-    const limit = 21;
+    const [maxPage, setMaxPage] = useState(500);
+    const limit = 22;
     const [currentPage, setCurrentPage] = useState(1);
 
 
@@ -24,13 +24,10 @@ const HomePage = () => {
         try {
             const offset = (currentPage - 1) * limit;
             const response = await PokemonServices.getAllPokemon(limit, offset)
-            const res = Object.entries(response.data.results)
-            res.sort((a, b) => {
-                return a[1].name.localeCompare(b[1].name);
-            })
+            setMaxPage(Math.ceil(response.data.count / limit));
             // console.log(response.data.results);
-            setPokemon(res);
-            setFilteredPokemon(res);
+            setPokemon(response.data.results);
+            setFilteredPokemon(response.data.results);
 
 
             setMaxPage(500);
@@ -48,17 +45,19 @@ const HomePage = () => {
     }
     // Appelle  mon fetch sur la page au moment du chargement
     useEffect(() => {
-        fetchPokemons(),
-        setSearchPokemon("")
-    }, [currentPage]);
+        fetchPokemons()
+    }, []);
 
     useEffect(() =>{
-        // Possible aussi : const filteredPokemons = pokemon.filter((pokemon)=>{return pokemon.name.toLowerCase().includes(searchPokemon.toLowerCase())})
-        setFilteredPokemon(pokemon.filter((tata) =>{
-            // return tata[1].name.toLowerCase().startsWith(searchChampion.toLowerCase());
-            return tata[1].name.toLowerCase().includes(searchPokemon.toLowerCase());
-        }))
+        const filteredPokemon = pokemon.filter((pokemons)=>{
+            return pokemons.name.toLowerCase().includes(searchPokemon.toLowerCase());
+        })
+        setFilteredPokemon(filteredPokemon);
     }, [searchPokemon])
+    useEffect(()=>{
+        fetchPokemons();
+        setSearchPokemon("");
+    },[currentPage])
 
     return <Container className='d-flex flex-column align-items-center mt-3'>
 
@@ -76,7 +75,7 @@ const HomePage = () => {
         <div className='d-flex justify-content-center flex-wrap gap-4'>
             {/* On peut mettre ((pokemon, index)=>{et dans key={index}}) ça donne la position de l'objet dans tableau*/}
             {filteredPokemon.map((pokemon) => {
-                return <PokemonCard pokemonCard={pokemon[1]} key={pokemon[1].id}></PokemonCard>
+                return <PokemonCard key={pokemon.name} pokemonCard={pokemon}></PokemonCard>
             })}
         </div>
 
@@ -84,22 +83,20 @@ const HomePage = () => {
         <Pagination className="mt-5" >
             {currentPage > 1 && <>
                 <Pagination.First onClick={() => { setCurrentPage(1) }} />
-                <Pagination.Prev onClick={() => { setCurrentPage(currentPage - 1) }} />
-                {/* <Pagination.Item onClick={() => { setCurrentPage(1) }} >{1}</Pagination.Item> */}
-                
+                <Pagination.Prev onClick={() => { setCurrentPage(currentPage - 1) }} />                
             </>}
 
             {currentPage - 5 > 0 && <>
                 <Pagination.Ellipsis onClick={() => { setCurrentPage(currentPage - 5) }} />
             </>}
 
-            {(currentPage != 2 && currentPage > 1) && <>
+            {currentPage - 1 >= 1 && <>
                 <Pagination.Item onClick={() => { setCurrentPage(currentPage - 1) }}>{currentPage - 1}</Pagination.Item>
             </>}
 
             <Pagination.Item active>{currentPage}</Pagination.Item>
 
-            {currentPage + 1 < maxPage && <>
+            {currentPage + 1 <= maxPage && <>
                 <Pagination.Item onClick={() => { setCurrentPage(currentPage + 1) }}>{currentPage + 1}</Pagination.Item>
             </>}
 
@@ -107,11 +104,9 @@ const HomePage = () => {
                 <Pagination.Ellipsis onClick={() => { setCurrentPage(currentPage + 5) }} />
             </>}
 
-            {currentPage < maxPage && <>
-                <Pagination.Item onClick={() => { setCurrentPage(maxPage) }} >{maxPage}</Pagination.Item>
+            {currentPage + 1 <= maxPage && <>
                 <Pagination.Next onClick={() => { setCurrentPage(currentPage + 1) }} />
                 <Pagination.Last onClick={() => { setCurrentPage(maxPage) }} />
-
             </>}
 
         </Pagination>
